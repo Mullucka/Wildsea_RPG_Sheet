@@ -10,7 +10,3 @@ This sheet is intended for use as a **Custom** character sheet in a Roll20 game.
 5. Copy/paste the contents of `sheet.css` into the **CSS Styling** box.
 6. Click **Save Changes**.
 7. Go back to the VTT, refresh the page, then create/open a character to see the sheet.
-
-## Notes
-- Repeating sections must follow Roll20 rules (no underscores in repeating section names).
-- This sheet uses only HTML/CSS (no sheetworkers).
