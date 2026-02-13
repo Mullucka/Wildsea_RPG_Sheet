@@ -1,14 +1,50 @@
 <!-- Roll20 Custom Sheet Sandbox HTML (no sheetworkers) -->
+
+<!-- ROLL TEMPLATE: ws-d6strip (top-level) -->
+<rolltemplate class="sheet-rolltemplate-ws-d6strip">
+  <div class="sheet-ws-rt">
+    <div class="sheet-ws-rt-h">{{name}}</div>
+
+    <div class="sheet-ws-rt-b">
+      {{#d1}}<span class="sheet-ws-rt-d">{{d1}}</span>{{/d1}}
+      {{#d2}}<span class="sheet-ws-rt-d">{{d2}}</span>{{/d2}}
+      {{#d3}}<span class="sheet-ws-rt-d">{{d3}}</span>{{/d3}}
+      {{#d4}}<span class="sheet-ws-rt-d">{{d4}}</span>{{/d4}}
+      {{#d5}}<span class="sheet-ws-rt-d">{{d5}}</span>{{/d5}}
+      {{#d6}}<span class="sheet-ws-rt-d">{{d6}}</span>{{/d6}}
+    </div>
+  </div>
+</rolltemplate>
+
+<!-- DICE ROLLER -->
 <div class="ws-sheet">
 
-  <!-- MODE RADIOS MUST BE SIBLINGS OF .ws-modes (so CSS can show/hide sections) -->
-  <!-- NOTE: removed hardcoded checked so Roll20's saved attr_sheet_mode controls the view -->
   <input id="ws-mode-character" class="ws-mode-radio" type="radio" name="attr_sheet_mode" value="character">
   <input id="ws-mode-npc"       class="ws-mode-radio" type="radio" name="attr_sheet_mode" value="npc">
   <input id="ws-mode-ship"      class="ws-mode-radio" type="radio" name="attr_sheet_mode" value="ship">
 
-  <!-- TOP RIGHT TABS -->
   <div class="ws-topbar">
+    <div class="ws-quickdice" aria-label="Quick Dice">
+      <button type="roll" class="ws-qd"
+        value="&{template:ws-d6strip} {{name=@{character_name}}} {{d1=[[1d6]]}}">1</button>
+
+      <button type="roll" class="ws-qd"
+        value="&{template:ws-d6strip} {{name=@{character_name}}} {{d1=[[1d6]]}} {{d2=[[1d6]]}}">2</button>
+
+      <button type="roll" class="ws-qd"
+        value="&{template:ws-d6strip} {{name=@{character_name}}} {{d1=[[1d6]]}} {{d2=[[1d6]]}} {{d3=[[1d6]]}}">3</button>
+
+      <button type="roll" class="ws-qd"
+        value="&{template:ws-d6strip} {{name=@{character_name}}} {{d1=[[1d6]]}} {{d2=[[1d6]]}} {{d3=[[1d6]]}} {{d4=[[1d6]]}}">4</button>
+
+      <button type="roll" class="ws-qd"
+        value="&{template:ws-d6strip} {{name=@{character_name}}} {{d1=[[1d6]]}} {{d2=[[1d6]]}} {{d3=[[1d6]]}} {{d4=[[1d6]]}} {{d5=[[1d6]]}}">5</button>
+
+      <button type="roll" class="ws-qd"
+        value="&{template:ws-d6strip} {{name=@{character_name}}} {{d1=[[1d6]]}} {{d2=[[1d6]]}} {{d3=[[1d6]]}} {{d4=[[1d6]]}} {{d5=[[1d6]]}} {{d6=[[1d6]]}}">6</button>
+    </div>
+
+    <!-- TABS -->
     <div class="ws-topbar-spacer"></div>
 
     <div class="ws-mode-tabs" role="tablist" aria-label="Sheet Mode">
@@ -27,6 +63,7 @@
     <div class="ws-mode ws-mode--character">
 
       <div class="ws-grid ws-grid--char">
+	  
         <!-- LEFT COLUMN -->
         <section class="ws-col ws-left">
 
@@ -1270,4 +1307,3 @@
     </section>
   </div>
 </div>
-
