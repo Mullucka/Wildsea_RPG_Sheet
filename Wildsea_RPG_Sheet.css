@@ -630,4 +630,136 @@
   gap: 6px;
   align-items: center;
 }
+/* =========================
+   TOPBAR + QUICK DICE
+   ========================= */
+
+.ws-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin: 8px 0 12px;
+}
+.ws-topbar-spacer{ flex:1; }
+
+/* Show quickdice only in Character mode */
+.ws-mode-radio[value="character"]:checked ~ .ws-modes .ws-quickdice { display:flex; }
+.ws-mode-radio:not([value="character"]):checked ~ .ws-modes .ws-quickdice { display:none; }
+
+/* Quickdice container */
+.ws-quickdice{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* Remove Roll20 d20 icon on roll buttons */
+.ws-sheet button[type="roll"].ws-qd::before{
+  content:none !important;
+}
+
+/* Small dice buttons */
+.ws-sheet button[type="roll"].ws-qd{
+  width:28px;
+  height:28px;
+  padding:0;
+  margin:0;
+
+  background: transparent !important;
+  background-image:none !important;
+
+  border:2px solid var(--ws-ink, #6f7f67);
+  border-radius:5px;
+
+  box-shadow:none !important;
+
+  font-size:16px;
+  font-weight:800;
+  line-height:22px;
+
+  color: var(--ws-ink, #6f7f67);
+  text-align:center;
+}
+.ws-sheet button[type="roll"].ws-qd:hover{
+  background: transparent !important;
+  filter: brightness(0.98);
+}
+.ws-sheet button[type="roll"].ws-qd:active{
+  transform: translateY(1px);
+}
+
+
+/* =========================
+   ROLL TEMPLATE: ws-d6strip
+   ========================= */
+
+/* Outer card */
+.sheet-rolltemplate-ws-d6strip .sheet-ws-rt{
+  border:2px solid var(--ws-ink, #60755b);
+  border-radius:10px;
+  overflow:hidden;
+  background:#f3f5ef;
+  max-width: 340px;
+}
+
+/* Header bar */
+.sheet-rolltemplate-ws-d6strip .sheet-ws-rt-h{
+  background: var(--ws-ink, #60755b);
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  padding:6px 10px;
+}
+
+/* Dice row */
+.sheet-rolltemplate-ws-d6strip .sheet-ws-rt-b{
+  padding:8px 10px;
+  display:flex;
+  gap:14px;
+  flex-wrap:nowrap;
+}
+
+/* Dice “slot” wrapper */
+.sheet-rolltemplate-ws-d6strip .sheet-ws-rt-d{
+  width:28px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* IMPORTANT: restyle Roll20's inline-roll result so it stops being yellow */
+.sheet-rolltemplate-ws-d6strip .inlinerollresult,
+.sheet-rolltemplate-ws-d6strip a.inlinerollresult{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:28px;
+  height:28px;
+
+  border:2px solid var(--ws-ink, #60755b) !important;
+  border-radius:6px;
+
+  background:#ffffff !important;
+  box-shadow:none !important;
+
+  color: var(--ws-ink, #60755b) !important;
+
+  font-weight:800;
+  font-size:18px;
+
+  padding:0 !important;
+  margin:0 !important;
+}
+
+/* Remove crit/fail coloring if it appears */
+.sheet-rolltemplate-ws-d6strip .inlinerollresult.fullcrit,
+.sheet-rolltemplate-ws-d6strip .inlinerollresult.fullfail,
+.sheet-rolltemplate-ws-d6strip .inlinerollresult.importantroll{
+  border:2px solid var(--ws-ink, #60755b) !important;
+  background:#ffffff !important;
+  color: var(--ws-ink, #60755b) !important;
+}
 
