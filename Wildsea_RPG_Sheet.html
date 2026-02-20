@@ -529,7 +529,7 @@
   <div class="ws-grid">
     <!-- LEFT COLUMN -->
     <section class="ws-col ws-left">
-
+<!-- Title -->
       <div class="ws-panel">
         <div class="ws-titlebar">
           <input class="ws-titleinput" type="text" name="attr_npc_header_name" placeholder="NAME" />
@@ -544,12 +544,28 @@
           <textarea class="ws-textarea ws-textarea-lg" name="attr_npc_description" placeholder="Editable description..."></textarea>
         </div>
       </div>
-
+<!-- Drives -->
       <div class="ws-panel">
         <div class="ws-sectionbar">DRIVES</div>
         <textarea class="ws-textarea ws-textarea-md" name="attr_npc_drives" placeholder="Editable drives..."></textarea>
       </div>
+<!-- Resistance/Weakness -->
+      <div class="ws-panel">
+        <div class="ws-sectionbar">WEAKNESS AND RESISTANCE</div>
 
+        <div class="ws-res-grid">
+          <div class="ws-res">
+            <div class="ws-res-h">WEAKNESS</div>
+            <textarea class="ws-textarea ws-textarea-sm" name="attr_npc_resources_weakness"></textarea>
+          </div>
+
+          <div class="ws-res">
+            <div class="ws-res-h">RESISTANCE</div>
+            <textarea class="ws-textarea ws-textarea-sm" name="attr_npc_resources_resistance"></textarea>
+          </div>
+        </div>
+      </div>
+	  <!-- Resources -->
       <div class="ws-panel">
         <div class="ws-sectionbar">RESOURCES</div>
 
@@ -623,24 +639,156 @@
         <input class="ws-len-radio ws-len-14" type="radio" name="attr_npc_aspect_len" value="14">
         <input class="ws-len-radio ws-len-15" type="radio" name="attr_npc_aspect_len" value="15">
 
-        <!-- same pip+X structure as Character Aspects -->
-        <div class="ws-pips ws-pips--15 ws-pips--x">
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_1"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_1"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_2"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_2"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_3"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_3"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_4"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_4"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_5"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_5"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_6"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_6"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_7"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_7"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_8"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_8"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_9"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_9"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_10"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_10"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_11"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_11"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_12"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_12"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_13"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_13"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_14"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_14"><span></span></label></div>
-          <div class="ws-pipstack"><input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_15"><label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_15"><span></span></label></div>
-        </div>
+<!-- same pip+X structure as Character Aspects -->
+<div class="ws-pips ws-pips--15 ws-pips--x">
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_1">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_1"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_1">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_2">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_2"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_2">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_3">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_3"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_3">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_4">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_4"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_4">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_5">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_5"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_5">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_6">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_6"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_6">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_7">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_7"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_7">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_8">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_8"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_8">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_9">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_9"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_9">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_10">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_10"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_10">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_11">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_11"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_11">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_12">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_12"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_12">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_13">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_13"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_13">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_14">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_14"><span></span></label>
+
+    <label class="ws-dashbtn">
+      <input class="ws-dashcheck" type="checkbox" name="attr_npc_aspect_dash_14">
+      <span class="ws-dash"></span>
+    </label>
+  </div>
+
+  <div class="ws-pipstack">
+    <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_15">
+    <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_15"><span></span></label>
+    <!-- no dash after the last pip -->
+  </div>
+
+</div>
 
         <select class="ws-len-select" name="attr_npc_aspect_len" aria-label="Aspect length">
           <option value="1">1</option><option value="2">2</option><option value="3">3</option>
