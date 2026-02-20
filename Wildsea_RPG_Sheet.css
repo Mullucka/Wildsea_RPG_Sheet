@@ -94,12 +94,179 @@
   pointer-events: none !important;
 }
 
-/* Pips */
-.ws-pips { display: flex !important; gap: 5px !important; flex-wrap: nowrap !important; align-items: center !important; justify-content: flex-start !important; overflow: hidden; min-width: 0; }
-.ws-pip { display: inline-flex !important; width: 12px !important; height: 12px !important; flex: 0 0 12px !important; position: relative !important; cursor: pointer !important; padding: 0 !important; margin: 0 !important; }
-.ws-pip input { position: absolute !important; opacity: 0 !important; pointer-events: none !important; }
-.ws-pip span { position: absolute !important; inset: 0 !important; width: 12px !important; height: 12px !important; border-radius: 999px !important; border: 2px solid #6f7f63 !important; background: transparent !important; }
-.ws-pip input:checked + span { background: #6f7f63 !important; }
+/* =========================================================
+   PIPS + DASHES (match your Figma mock)
+   ========================================================= */
+
+/* Track geometry (tune these 3 numbers to match your mock exactly) */
+.ws-pips--x{
+  --ws-pip: 22px;    /* circle diameter */
+  --ws-pip-b: 3px;   /* circle outline thickness */
+  --ws-gap: 10px;    /* empty space between circles (dash fills this) */
+}
+
+/* Pips row */
+.ws-pips{
+  display: flex !important;
+  gap: var(--ws-gap, 6px) !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Click target box for each pip */
+.ws-pip{
+  display: inline-flex !important;
+  width: var(--ws-pip, 12px) !important;
+  height: var(--ws-pip, 12px) !important;
+  flex: 0 0 var(--ws-pip, 12px) !important;
+  position: relative !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide the actual checkbox */
+.ws-pip input{
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Circle visual (explicit square; no inset to avoid oval artifacts) */
+.ws-pip span{
+  display: block !important;
+  width: var(--ws-pip, 12px) !important;
+  height: var(--ws-pip, 12px) !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  border: var(--ws-pip-b, 2px) solid #6f7f63 !important;
+  background: transparent !important;
+}
+
+/* Filled pip */
+.ws-pip input:checked + span{
+  background: #6f7f63 !important;
+}
+
+/* Aspect X-toggles */
+.ws-pips--x { gap: var(--ws-gap, 6px) !important; }
+.ws-pipstack{
+  display: flex;
+  flex-direction: column-reverse; /* keeps X toggle under pip */
+  align-items: center;
+  gap: 3px;
+  width: var(--ws-pip, 12px);
+  flex: 0 0 var(--ws-pip, 12px);
+  position: relative; /* anchor for absolute dash */
+}
+
+.ws-xcheck{
+  width: 7px;
+  height: 7px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #6f7f63;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.ws-xcheck:checked{ background:#6f7f63; }
+
+/* X overlay on the circle when xcheck is on */
+.ws-pip span { position: relative !important; }
+.ws-pip span::before,
+.ws-pip span::after{
+  content:"";
+  position:absolute;
+  left: -1px;
+  right: -1px;
+  top: 50%;
+  height: 2px;
+  background:#6f7f63;
+  transform-origin:center;
+  opacity:0;
+}
+.ws-pip span::before{ transform: translateY(-50%) rotate(45deg); }
+.ws-pip span::after { transform: translateY(-50%) rotate(-45deg); }
+
+.ws-xcheck:checked + .ws-pip span::before,
+.ws-xcheck:checked + .ws-pip span::after{ opacity:1; }
+
+/* DASH TOGGLES (uses your working HTML structure: dash is sibling inside ws-pipstack) */
+.ws-dashbtn{
+  position: absolute;
+
+  /* start lane exactly at circle’s right edge */
+  left: var(--ws-pip, 12px);
+  top: 0;
+
+  /* lane dimensions */
+  width: var(--ws-gap, 6px);
+  height: var(--ws-pip, 12px);
+
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide dash checkbox */
+.ws-dashbtn .ws-dashcheck{
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Horizontal dash (fills exactly the gap, vertically centered) */
+.ws-dashbtn .ws-dash{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: var(--ws-gap, 6px);
+  height: var(--ws-pip-b, 2px);
+
+  background:#6f7f63;
+  border-radius: 1px;
+}
+
+/* Vertical dash (same height as circle, TRUE centered between circles) */
+.ws-dashbtn .ws-dashcheck:checked + .ws-dash{
+  position: absolute;
+
+  /* center the dash’s own width inside the gap lane */
+  left: calc((var(--ws-gap, 6px) - var(--ws-pip-b, 2px)) / 2);
+  top: 0;
+
+  width: var(--ws-pip-b, 2px);
+  height: var(--ws-pip, 12px);
+
+  transform: none;
+}
+
+/* Hide dash on the last visible pip for selected track length */
+.ws-trackline-right .ws-len-1:checked  ~ .ws-pips--15 > :nth-child(1)  .ws-dashbtn,
+.ws-trackline-right .ws-len-2:checked  ~ .ws-pips--15 > :nth-child(2)  .ws-dashbtn,
+.ws-trackline-right .ws-len-3:checked  ~ .ws-pips--15 > :nth-child(3)  .ws-dashbtn,
+.ws-trackline-right .ws-len-4:checked  ~ .ws-pips--15 > :nth-child(4)  .ws-dashbtn,
+.ws-trackline-right .ws-len-5:checked  ~ .ws-pips--15 > :nth-child(5)  .ws-dashbtn,
+.ws-trackline-right .ws-len-6:checked  ~ .ws-pips--15 > :nth-child(6)  .ws-dashbtn,
+.ws-trackline-right .ws-len-7:checked  ~ .ws-pips--15 > :nth-child(7)  .ws-dashbtn,
+.ws-trackline-right .ws-len-8:checked  ~ .ws-pips--15 > :nth-child(8)  .ws-dashbtn,
+.ws-trackline-right .ws-len-9:checked  ~ .ws-pips--15 > :nth-child(9)  .ws-dashbtn,
+.ws-trackline-right .ws-len-10:checked ~ .ws-pips--15 > :nth-child(10) .ws-dashbtn,
+.ws-trackline-right .ws-len-11:checked ~ .ws-pips--15 > :nth-child(11) .ws-dashbtn,
+.ws-trackline-right .ws-len-12:checked ~ .ws-pips--15 > :nth-child(12) .ws-dashbtn,
+.ws-trackline-right .ws-len-13:checked ~ .ws-pips--15 > :nth-child(13) .ws-dashbtn,
+.ws-trackline-right .ws-len-14:checked ~ .ws-pips--15 > :nth-child(14) .ws-dashbtn,
+.ws-trackline-right .ws-len-15:checked ~ .ws-pips--15 > :nth-child(15) .ws-dashbtn{ display:none !important; }
 
 /* Track-length hiding (max 15) - SCOPED FIX (prevents repeater interference) */
 .ws-trackline-right .ws-len-1:checked  ~ .ws-pips--15 > :nth-child(n+2),
@@ -118,7 +285,9 @@
 .ws-trackline-right .ws-len-14:checked ~ .ws-pips--15 > :nth-child(n+15),
 .ws-trackline-right .ws-len-15:checked ~ .ws-pips--15 > :nth-child(n+16) { display: none !important; }
 
-/* MIRES: compact row (textarea left, 2 pips right, top-aligned) */
+/* =========================
+   MIRES: compact row (textarea left, 2 pips right, top-aligned)
+   ========================= */
 .ws-mireitem { padding: 6px 8px; }
 
 .ws-mire-row{
@@ -178,43 +347,6 @@
 .ws-miles-pad { padding: 6px; }
 .ws-textarea-miles { height: 6em; min-height: 3.6em; resize: vertical; }
 
-/* Aspect X-toggles */
-.ws-pips--x { gap: 6px !important; }
-.ws-pipstack { display: flex; flex-direction: column-reverse; align-items: center; gap: 3px; width: 12px; flex: 0 0 12px; }
-
-.ws-xcheck {
-  width: -1px;
-  height: -1px;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid #6f7f63;
-  border-radius: 999px;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-}
-.ws-xcheck:checked { background: #6f7f63; }
-
-.ws-pip span { position: relative !important; }
-.ws-pip span::before,
-.ws-pip span::after {
-  content: "";
-  position: absolute;
-  left: -1px;
-  right: -1px;
-  top: 50%;
-  height: 2px;
-  background: #6f7f63;
-  transform-origin: center;
-  opacity: 0;
-}
-.ws-pip span::before { transform: translateY(-50%) rotate(45deg); }
-.ws-pip span::after  { transform: translateY(-50%) rotate(-45deg); }
-
-.ws-xcheck:checked + .ws-pip span::before,
-.ws-xcheck:checked + .ws-pip span::after { opacity: 1; }
-
 /* Collapsible panels (remembered via attr_c_* checkboxes) */
 .ws-collapse{
   position: absolute !important;
@@ -246,19 +378,14 @@
 }
 
 /* Default (open) arrow = up */
-.ws-collapse:checked + .ws-collapsible .ws-collapse-arrow::before{
-  content: "▴";
-}
+.ws-collapse:checked + .ws-collapsible .ws-collapse-arrow::before{ content: "▴"; }
 
 /* Closed arrow = down */
-.ws-collapse:not(:checked) + .ws-collapsible .ws-collapse-arrow::before{
-  content: "▾";
-}
+.ws-collapse:not(:checked) + .ws-collapsible .ws-collapse-arrow::before{ content: "▾"; }
 
 /* Hide body when closed */
-.ws-collapse:not(:checked) + .ws-collapsible .ws-collapse-body{
-  display: none;
-}
+.ws-collapse:not(:checked) + .ws-collapsible .ws-collapse-body{ display: none; }
+
 /* =========================
    NPC TAB: scoped styling
    ========================= */
@@ -294,10 +421,7 @@
   flex: 0 0 auto;
 }
 
-.ws-mode--npc .ws-label{
-  font-size: 11px;
-  opacity: 0.95;
-}
+.ws-mode--npc .ws-label{ font-size: 11px; opacity: 0.95; }
 
 .ws-mode--npc .ws-size input{
   width: 110px;
@@ -359,6 +483,7 @@
   gap: 8px;
   min-width: 0;
 }
+
 /* ---- SHIP GRID (same two-column behavior as others) ---- */
 .ws-grid--ship {
   display: grid;
@@ -415,13 +540,10 @@
 
 /* small design textareas height (if needed) */
 .ws-textarea-design { min-height: 52px; }
+
 /* =========================
    SHIP HEADER (match NPC)
    ========================= */
-
-/* If your NPC header styles are scoped like .ws-mode--npc .ws-titlebar {...},
-   you must repeat them for ship mode. */
-
 .ws-mode--ship .ws-titlebar{
   display:flex;
   align-items:center;
@@ -454,7 +576,7 @@
 }
 
 .ws-mode--ship .ws-size input{
-  width:130px;              /* adjust to taste */
+  width:130px;
   height:24px;
   padding:2px 6px;
   border:1px solid rgba(255,255,255,0.35);
@@ -463,20 +585,17 @@
   color:#fff;
 }
 
-.ws-mode--ship .ws-size input::placeholder{
-  color:rgba(255,255,255,0.75);
-}
+.ws-mode--ship .ws-size input::placeholder{ color:rgba(255,255,255,0.75); }
 
 /* Optional: if your ship header panel has rounded corners, ensure titlebar matches */
 .ws-mode--ship .ws-panel > .ws-titlebar + .ws-block{
   border-top-left-radius:0;
   border-top-right-radius:0;
 }
+
 /* =========================
    SHIP HEADER tweaks
    ========================= */
-
-/* Make NAME look like NPC “PANGOSKA” header text (no input box visible) */
 .ws-mode--ship .ws-titleinput--ship{
   background: transparent;
   border: none;
@@ -488,16 +607,11 @@
   color: #fff;
   text-transform: uppercase;
   font-weight: 800;
-  font-size: 18px; /* match your NPC header size; adjust if needed */
+  font-size: 18px;
 }
 
-/* Keep it editable but remove focus ring/box styling */
-.ws-mode--ship .ws-titleinput--ship:focus{
-  outline: none;
-  box-shadow: none;
-}
+.ws-mode--ship .ws-titleinput--ship:focus{ outline:none; box-shadow:none; }
 
-/* Remove the extra “box around motif” by flattening the container */
 .ws-mode--ship .ws-size--ship{
   border: none;
   border-radius: 0;
@@ -506,7 +620,6 @@
   gap: 8px;
 }
 
-/* Style the Type input like the NPC size field (not boxed container) */
 .ws-mode--ship .ws-typeinput{
   width: 130px;
   height: 24px;
@@ -517,76 +630,66 @@
   color: #fff;
 }
 
-.ws-mode--ship .ws-typeinput::placeholder{
-  color: rgba(255,255,255,0.75);
-}
+.ws-mode--ship .ws-typeinput::placeholder{ color: rgba(255,255,255,0.75); }
 
-/* Ensure the titlebar still lays out correctly */
 .ws-mode--ship .ws-titlebar--ship{
   display:flex;
   align-items:center;
   gap:12px;
 }
+
 /* Ship titlebar: force clean rounded corners */
 .ws-mode--ship .ws-titlebar{
   border-radius: 6px 6px 0 0;
-  overflow: hidden;                 /* key: clips inner corners */
-  background-clip: padding-box;     /* reduces corner “seams” */
+  overflow: hidden;
+  background-clip: padding-box;
 }
 
-/* If the motif box still causes seams, remove its outer background/border */
 .ws-mode--ship .ws-titlebar .ws-size--ship{
   background: transparent;
   border: 0;
   box-shadow: none;
 }
 
-/* Keep the motif input styled without creating a second rounded border seam */
-.ws-mode--ship .ws-titlebar .ws-size--ship input{
-  border-radius: 4px;
-}
+.ws-mode--ship .ws-titlebar .ws-size--ship input{ border-radius: 4px; }
+
 /* === SHIP HEADER PANEL: ONE rounded container, header fill painted by the panel === */
 .ws-mode--ship .ws-panel.ws-ship-header{
   position: relative;
-  border-radius: 8px;     /* MUST match your .ws-panel radius */
-  overflow: hidden;       /* clips the header fill cleanly */
-  padding: 0;             /* IMPORTANT: prevents corner gaps from panel padding */
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
 }
 
-/* Paint the green header bar as part of the panel, so it clips perfectly */
 .ws-mode--ship .ws-panel.ws-ship-header::before{
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 44px;           /* set to your titlebar height */
-  background: #6f7b62;    /* EXACT same green you use for NPC titlebar */
+  height: 44px;
+  background: #6f7b62;
   z-index: 0;
 }
 
-/* Titlebar no longer owns the background (prevents anti-aliased corner seams) */
 .ws-mode--ship .ws-panel.ws-ship-header .ws-titlebar{
   position: relative;
   z-index: 1;
   background: transparent;
   border-radius: 0;
   margin: 0;
-  padding: 10px;          /* move spacing here since panel padding is now 0 */
-}
-
-/* Body content spacing (since panel padding is 0) */
-.ws-mode--ship .ws-panel.ws-ship-header .ws-block{
   padding: 10px;
 }
+
+.ws-mode--ship .ws-panel.ws-ship-header .ws-block{ padding: 10px; }
+
 /* =========================
    SHIP — STAKES
    ========================= */
-
 .ws-mode--ship .ws-stakes-row{
   display:flex;
-  justify-content:center;     /* center the pair */
+  justify-content:center;
   align-items:center;
-  gap:40px;                   /* space between Used and Total */
-  padding:18px 0;             /* makes the panel taller */
+  gap:40px;
+  padding:18px 0;
 }
 
 .ws-mode--ship .ws-stake-col{
@@ -596,7 +699,6 @@
   gap:8px;
 }
 
-/* Labels (USED / TOTAL) */
 .ws-mode--ship .ws-stake-col .ws-item-label{
   font-weight:800;
   font-size:14px;
@@ -604,17 +706,15 @@
   letter-spacing:0.5px;
 }
 
-/* Input fields */
 .ws-mode--ship .ws-stake-col input{
   width:90px;
-  height:42px;                /* taller */
-  font-size:24px;             /* bigger number */
+  height:42px;
+  font-size:24px;
   font-weight:700;
   text-align:center;
   border-radius:6px;
 }
 
-/* Optional slash between values */
 .ws-mode--ship .ws-stakes-row::after{
   content:"/";
   position:absolute;
@@ -623,6 +723,7 @@
   font-weight:700;
   opacity:0.6;
 }
+
 /* Ship Reputation: allow 3 pips without wrapping */
 .ws-mode--ship .ws-mire-pips--3{
   display: grid;
@@ -630,10 +731,10 @@
   gap: 6px;
   align-items: center;
 }
+
 /* =========================
    TOPBAR + QUICK DICE
    ========================= */
-
 .ws-topbar{
   display:flex;
   align-items:center;
@@ -689,12 +790,9 @@
   transform: translateY(1px);
 }
 
-
 /* =========================
    ROLL TEMPLATE: ws-d6strip
    ========================= */
-
-/* Outer card */
 .sheet-rolltemplate-ws-d6strip .sheet-ws-rt{
   border:2px solid var(--ws-ink, #60755b);
   border-radius:10px;
@@ -703,7 +801,6 @@
   max-width: 340px;
 }
 
-/* Header bar */
 .sheet-rolltemplate-ws-d6strip .sheet-ws-rt-h{
   background: var(--ws-ink, #60755b);
   color:#fff;
@@ -712,7 +809,6 @@
   padding:6px 10px;
 }
 
-/* Dice row */
 .sheet-rolltemplate-ws-d6strip .sheet-ws-rt-b{
   padding:8px 10px;
   display:flex;
@@ -720,7 +816,6 @@
   flex-wrap:nowrap;
 }
 
-/* Dice “slot” wrapper */
 .sheet-rolltemplate-ws-d6strip .sheet-ws-rt-d{
   width:28px;
   height:28px;
@@ -729,7 +824,6 @@
   justify-content:center;
 }
 
-/* IMPORTANT: restyle Roll20's inline-roll result so it stops being yellow */
 .sheet-rolltemplate-ws-d6strip .inlinerollresult,
 .sheet-rolltemplate-ws-d6strip a.inlinerollresult{
   display:inline-flex;
@@ -754,7 +848,6 @@
   margin:0 !important;
 }
 
-/* Remove crit/fail coloring if it appears */
 .sheet-rolltemplate-ws-d6strip .inlinerollresult.fullcrit,
 .sheet-rolltemplate-ws-d6strip .inlinerollresult.fullfail,
 .sheet-rolltemplate-ws-d6strip .inlinerollresult.importantroll{
@@ -762,4 +855,3 @@
   background:#ffffff !important;
   color: var(--ws-ink, #60755b) !important;
 }
-
