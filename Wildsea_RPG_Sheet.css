@@ -95,7 +95,7 @@
 }
 
 /* =========================================================
-   PIPS + DASHES (match your Figma mock)
+   PIPS + DASHES
    ========================================================= */
 
 /* Track geometry (tune these 3 numbers to match your mock exactly) */
@@ -197,7 +197,7 @@
 .ws-xcheck:checked + .ws-pip span::before,
 .ws-xcheck:checked + .ws-pip span::after{ opacity:1; }
 
-/* DASH TOGGLES (uses your working HTML structure: dash is sibling inside ws-pipstack) */
+/* DASH TOGGLES */
 .ws-dashbtn{
   position: absolute;
 
@@ -284,6 +284,15 @@
 .ws-trackline-right .ws-len-13:checked ~ .ws-pips--15 > :nth-child(n+14),
 .ws-trackline-right .ws-len-14:checked ~ .ws-pips--15 > :nth-child(n+15),
 .ws-trackline-right .ws-len-15:checked ~ .ws-pips--15 > :nth-child(n+16) { display: none !important; }
+
+/* Character Shared Tracks + Player Tracks + Ship Shared Tracks */
+.ws-panel--sharedtracks,
+.ws-panel--playertracks,
+.ws-panel--shipsharedtracks{
+  --ws-pip: 22px;
+  --ws-pip-b: 3px;
+  --ws-gap: 10px;
+}
 
 /* =========================
    MIRES: compact row (textarea left, 2 pips right, top-aligned)
