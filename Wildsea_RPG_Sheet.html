@@ -1,4 +1,4 @@
-<!-- Roll20 Custom Sheet Sandbox HTML (no sheetworkers) -->
+<!-- WILDSEA CHARACTER/HAZARD/SHIP SHEET -->
 
 <!-- ROLL TEMPLATE: ws-d6strip (top-level) -->
 <rolltemplate class="sheet-rolltemplate-ws-d6strip">
@@ -57,9 +57,9 @@
   <!-- PANELS BY MODE -->
   <div class="ws-modes">
 
-    <!-- ===================== -->
-    <!-- CHARACTER MODE (BUILD) -->
-    <!-- ===================== -->
+    <!-- ============== -->
+    <!-- CHARACTER MODE -->
+    <!-- ============== -->
     <div class="ws-mode ws-mode--character">
 
       <div class="ws-grid ws-grid--char">
@@ -522,8 +522,9 @@
         </section>
       </div>
     </div>
-
+<!-- ======== -->
 <!-- NPC MODE -->
+<!-- ======== -->
 <div class="ws-mode ws-mode--npc">
 
   <div class="ws-grid">
@@ -611,7 +612,7 @@
       <div class="ws-panel">
         <div class="ws-sectionbar">ASPECTS</div>
 
-        <!-- CHANGED: repeating_npc_aspects -> repeating_npcaspects -->
+        <!-- REPEATING NPC ASPECTS -->
         <fieldset class="repeating_npcaspects ws-repeat">
   <div class="ws-item ws-aspect">
     <div class="ws-item-row">
@@ -639,7 +640,7 @@
         <input class="ws-len-radio ws-len-14" type="radio" name="attr_npc_aspect_len" value="14">
         <input class="ws-len-radio ws-len-15" type="radio" name="attr_npc_aspect_len" value="15">
 
-<!-- same pip+X structure as Character Aspects -->
+<!-- PIP STRUCTURE -->
 <div class="ws-pips ws-pips--15 ws-pips--x">
 
   <div class="ws-pipstack">
@@ -785,7 +786,7 @@
   <div class="ws-pipstack">
     <input class="ws-xcheck" type="checkbox" name="attr_npc_aspect_x_15">
     <label class="ws-pip"><input type="checkbox" name="attr_npc_aspect_pip_15"><span></span></label>
-    <!-- no dash after the last pip -->
+
   </div>
 
 </div>
@@ -813,7 +814,7 @@
       <div class="ws-panel">
         <div class="ws-sectionbar">QUIRKS</div>
 
-        <!-- CHANGED: repeating_npc_quirks -> repeating_npcquirks -->
+        <!-- REPEATING NPC QUIRKS -->
         <fieldset class="repeating_npcquirks ws-repeat">
           <div class="ws-item ws-quirk">
             <div class="ws-item-top">
@@ -836,15 +837,16 @@
 
 </div>
 
-
+<!-- ========= -->
 <!-- SHIP MODE -->
+<!-- ========= -->
 <div class="ws-mode ws-mode--ship">
 
   <div class="ws-grid ws-grid--ship">
     <!-- LEFT COLUMN -->
     <section class="ws-col ws-left">
 
- <!-- SHIP: HEADER (NPC-style) -->
+ <!-- SHIP HEADER -->
 <div class="ws-panel ws-ship-header">
   <div class="ws-titlebar ws-titlebar--ship">
     <input class="ws-titleinput ws-titleinput--ship" type="text" name="attr_ship_name" placeholder="NAME" />
@@ -1030,7 +1032,6 @@
             </div>
           </div>
 
-          <!-- REUSE THE SAME BLOCK FOR THE OTHER RATINGS -->
           <div class="ws-ship-rating">
             <div class="ws-ship-rating-name">SEALS</div>
             <div class="ws-ship-rating-track">
@@ -1080,7 +1081,6 @@
             </div>
           </div>
 
-          <!-- SPEED -->
 <div class="ws-ship-rating">
   <div class="ws-ship-rating-name">SPEED</div>
   <div class="ws-ship-rating-track">
@@ -1130,7 +1130,6 @@
   </div>
 </div>
 
-<!-- SAWS -->
 <div class="ws-ship-rating">
   <div class="ws-ship-rating-name">SAWS</div>
   <div class="ws-ship-rating-track">
@@ -1180,7 +1179,6 @@
   </div>
 </div>
 
-<!-- STEALTH -->
 <div class="ws-ship-rating">
   <div class="ws-ship-rating-name">STEALTH</div>
   <div class="ws-ship-rating-track">
@@ -1230,7 +1228,6 @@
   </div>
 </div>
 
-<!-- TILT -->
 <div class="ws-ship-rating">
   <div class="ws-ship-rating-name">TILT</div>
   <div class="ws-ship-rating-track">
@@ -1349,7 +1346,7 @@
         </fieldset>
       </div>
 
-      <!-- REPUTATION (same structure as Character MIRES, but 3 pips) -->
+      <!-- REPUTATION -->
 <div class="ws-panel">
   <div class="ws-sectionbar">REPUTATION</div>
 
@@ -1383,7 +1380,7 @@
         <div class="ws-sectionbar">NOTES</div>
         <textarea class="ws-textarea ws-textarea-lg" name="attr_ship_notes"></textarea>
       </div>
-<!-- SHIP: SHARED TRACKS (bottom of right column) -->
+<!-- SHIP SHARED TRACKS -->
 <div class="ws-panel ws-panel--shipsharedtracks">
   <div class="ws-sectionbar">SHARED TRACKS</div>
 
