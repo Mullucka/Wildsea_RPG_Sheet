@@ -1,10 +1,11 @@
-/* Roll20 Custom Sheet Sandbox CSS (no sheetworkers) */
+/* WILDSEA CHARACTER/HAZARD/SHIP SHEET */
+
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap');
 
 .ws-sheet { font-family: "Barlow", Arial, sans-serif; font-size: 12px; line-height: 1.25; color: #1c1f1c; box-sizing: border-box; }
 .ws-sheet * { box-sizing: border-box; }
 
-/* Persist anchor for repeating rows (forces Roll20 to store the row immediately) */
+/* Persist anchor for repeating rows */
 .ws-rowpersist{
   position: absolute !important;
   opacity: 0 !important;
@@ -98,11 +99,11 @@
    PIPS + DASHES
    ========================================================= */
 
-/* Track geometry (tune these 3 numbers to match your mock exactly) */
+/* Track geometry */
 .ws-pips--x{
   --ws-pip: 22px;    /* circle diameter */
   --ws-pip-b: 3px;   /* circle outline thickness */
-  --ws-gap: 10px;    /* empty space between circles (dash fills this) */
+  --ws-gap: 10px;    /* empty space between circles */
 }
 
 /* Pips row */
@@ -128,14 +129,14 @@
   margin: 0 !important;
 }
 
-/* Hide the actual checkbox */
+/* Hide the checkbox */
 .ws-pip input{
   position: absolute !important;
   opacity: 0 !important;
   pointer-events: none !important;
 }
 
-/* Circle visual (explicit square; no inset to avoid oval artifacts) */
+/* Circle visual */
 .ws-pip span{
   display: block !important;
   width: var(--ws-pip, 12px) !important;
@@ -223,7 +224,7 @@
   pointer-events: none !important;
 }
 
-/* Horizontal dash (fills exactly the gap, vertically centered) */
+/* Horizontal dash */
 .ws-dashbtn .ws-dash{
   position: absolute;
   left: 0;
@@ -237,7 +238,7 @@
   border-radius: 1px;
 }
 
-/* Vertical dash (same height as circle, TRUE centered between circles) */
+/* Vertical dash */
 .ws-dashbtn .ws-dashcheck:checked + .ws-dash{
   position: absolute;
 
@@ -268,7 +269,7 @@
 .ws-trackline-right .ws-len-14:checked ~ .ws-pips--15 > :nth-child(14) .ws-dashbtn,
 .ws-trackline-right .ws-len-15:checked ~ .ws-pips--15 > :nth-child(15) .ws-dashbtn{ display:none !important; }
 
-/* Track-length hiding (max 15) - SCOPED FIX (prevents repeater interference) */
+/* Track-length hiding (max 15) */
 .ws-trackline-right .ws-len-1:checked  ~ .ws-pips--15 > :nth-child(n+2),
 .ws-trackline-right .ws-len-2:checked  ~ .ws-pips--15 > :nth-child(n+3),
 .ws-trackline-right .ws-len-3:checked  ~ .ws-pips--15 > :nth-child(n+4),
@@ -294,9 +295,9 @@
   --ws-gap: 10px;
 }
 
-/* =========================
-   MIRES: compact row (textarea left, 2 pips right, top-aligned)
-   ========================= */
+/* ==================
+   MIRES: compact row 
+   ================== */
 .ws-mireitem { padding: 6px 8px; }
 
 .ws-mire-row{
@@ -356,7 +357,7 @@
 .ws-miles-pad { padding: 6px; }
 .ws-textarea-miles { height: 6em; min-height: 3.6em; resize: vertical; }
 
-/* Collapsible panels (remembered via attr_c_* checkboxes) */
+/* Collapsible panels */
 .ws-collapse{
   position: absolute !important;
   opacity: 0 !important;
@@ -365,7 +366,7 @@
   pointer-events: none !important;
 }
 
-/* Make sectionbar act like a clickable header with a right-side arrow */
+/* Clickable header with right-side arrow */
 .ws-collapsible .ws-sectionbar{
   display: flex;
   align-items: center;
@@ -395,9 +396,9 @@
 /* Hide body when closed */
 .ws-collapse:not(:checked) + .ws-collapsible .ws-collapse-body{ display: none; }
 
-/* =========================
+/* =======================
    NPC TAB: scoped styling
-   ========================= */
+   ======================= */
 .ws-mode--npc .ws-titlebar{
   display: flex;
   align-items: center;
@@ -453,7 +454,7 @@
   color: #2a2f2a;
 }
 
-/* Repeating item top row + delete button (NPC-only usage) */
+/* Repeating item top row + delete button*/
 .ws-mode--npc .ws-item-top{
   display: flex;
   align-items: flex-start;
@@ -475,7 +476,7 @@
 .ws-mode--npc .ws-iconbtn:hover{ background: #f0f2ea; }
 .ws-mode--npc .ws-ic{ font-size: 13px; line-height: 1; }
 
-/* NPC aspect track row (uses ws-track, not ws-trackline) */
+/* NPC aspect track row */
 .ws-mode--npc .ws-track{
   margin-top: 6px;
   border-top: 1px solid #c8d0be;
@@ -493,14 +494,14 @@
   min-width: 0;
 }
 
-/* ---- SHIP GRID (same two-column behavior as others) ---- */
+/* ---- SHIP GRID ---- */
 .ws-grid--ship {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 
-/* make the NAME label above the ship name input match style */
+/* NAME label above the ship name */
 .ws-titlewrap { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .ws-titlelabel {
   font-weight: 700;
@@ -540,19 +541,19 @@
   font-size: 12px;
 }
 
-/* tighten rating track row (uses your existing ws-trackline-right / ws-pips / ws-len-select) */
+/* tighten rating track row */
 .ws-ship-rating-track .ws-trackline-right { width: 100%; }
 
 /* reputation row */
 .ws-repitem { padding: 8px 10px 10px; }
 .ws-rep-pips { display: flex; gap: 6px; margin-top: 8px; }
 
-/* small design textareas height (if needed) */
+/* textareas height*/
 .ws-textarea-design { min-height: 52px; }
 
-/* =========================
-   SHIP HEADER (match NPC)
-   ========================= */
+/* ===========
+   SHIP HEADER 
+   =========== */
 .ws-mode--ship .ws-titlebar{
   display:flex;
   align-items:center;
@@ -596,15 +597,15 @@
 
 .ws-mode--ship .ws-size input::placeholder{ color:rgba(255,255,255,0.75); }
 
-/* Optional: if your ship header panel has rounded corners, ensure titlebar matches */
+/* Rounded corners, ensure titlebar matches */
 .ws-mode--ship .ws-panel > .ws-titlebar + .ws-block{
   border-top-left-radius:0;
   border-top-right-radius:0;
 }
 
-/* =========================
+/* ==================
    SHIP HEADER tweaks
-   ========================= */
+   ================== */
 .ws-mode--ship .ws-titleinput--ship{
   background: transparent;
   border: none;
@@ -662,7 +663,7 @@
 
 .ws-mode--ship .ws-titlebar .ws-size--ship input{ border-radius: 4px; }
 
-/* === SHIP HEADER PANEL: ONE rounded container, header fill painted by the panel === */
+/* === SHIP HEADER PANEL === */
 .ws-mode--ship .ws-panel.ws-ship-header{
   position: relative;
   border-radius: 8px;
@@ -690,9 +691,9 @@
 
 .ws-mode--ship .ws-panel.ws-ship-header .ws-block{ padding: 10px; }
 
-/* =========================
+/* =============
    SHIP — STAKES
-   ========================= */
+   ============= */
 .ws-mode--ship .ws-stakes-row{
   display:flex;
   justify-content:center;
@@ -733,7 +734,7 @@
   opacity:0.6;
 }
 
-/* Ship Reputation: allow 3 pips without wrapping */
+/* Ship Reputation */
 .ws-mode--ship .ws-mire-pips--3{
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -741,9 +742,9 @@
   align-items: center;
 }
 
-/* =========================
+/* ===================
    TOPBAR + QUICK DICE
-   ========================= */
+   =================== */
 .ws-topbar{
   display:flex;
   align-items:center;
